@@ -1,0 +1,40 @@
+var rule =[
+	{
+		letter:'A',
+		max:100,
+		min:90,
+		valuee:4,
+	},
+	{
+		letter:'B',
+		max:89,
+		min:80,
+		valuee:3,
+	},
+	{
+		letter:'C',
+		max:79,
+		min:70,
+		valuee:2,
+	},
+	{
+		letter:'D',
+		max:69,
+		min:60,
+		valuee:1,
+	},
+	{
+		letter:'F',
+		max:59,
+		min:0,
+		valuee:0,
+	}
+];
+var indiceCuatrimestrar =[
+	/*
+	{Structure
+		calification:''
+		crdt:''
+	}
+	*/
+];
