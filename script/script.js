@@ -17,6 +17,28 @@ function ref(where)
 	}
 	document.getElementById('menu').style.top="-100%";
 }
+function trim(string)
+{
+	var n = string.length;
+	var p_espacio ="";
+	for (var i = 0; i<= n ; i++)
+	{
+		if (string.charAt(i)==" ")
+			p_espacio += string.charAt(i).replace(" ","");
+		else
+			p_espacio += string.charAt(i);
+	}
+	return p_espacio;
+}
+function empty(i)
+{
+	var confirmar = trim(i);
+	if (confirmar.length < 1){
+		return true;
+	}else{
+		return false;
+	}
+}
 function verfyfild(id, button)
 {//this fuctione is for verify de num field
 	var verify = document.getElementById(id).value;
@@ -33,6 +55,39 @@ function verfyfild(id, button)
 		document.getElementById(button).style.background="#c0392b";
 		document.getElementById('alert').innerHTML="Deben ser valores numericos.";
 	}
+}
+function verify(conter, kind)
+{
+	var verify_;
+	if(kind=="cuatrimestral"){
+		var string, comprobar;
+		for(var i=0; i < conter;i++){
+			string = document.getElementById("subject"+i).value;
+			comprobar = document.getElementById("crdt"+i).value;
+			if (empty(string)) {
+				return false;
+				i = conter;
+			}else if(empty(comprobar)){
+				return false;
+				i = conter;
+			}else{
+				verify_ = true;
+			}
+		}
+	}else if(kind=="acumulado"){
+		var string;
+		for(var i=0;i < conter;i++){
+			string = document.getElementById("cuatrimestre"+i).value;
+			if(empty(string)){
+				return false;
+				i = conter;
+			}else{
+				verify_ = true;
+			}
+		}
+	}
+	if (verify_!="")
+		return verify_;
 }
 function reedJson(pointer, classStyle)
 {//this function is for get element from a Js object
@@ -80,7 +135,7 @@ function calc(kind)
 			display+="<tr><td>"+(i+1)+": </td><td><input type='number' maxlength=\"3\" onKeyUp=\"verfyfild('subject"+i+"','calcb')\" placeholder=\"00\" id='subject"+i+"'></td><td><input type='number' placeholder=\"0\" maxlength=\"1\" onKeyUp=\"verfyfild('crdt"+i+"','calcb')\" id='crdt"+i+"'></td></tr>";
 		}
 		display +="<tr><td></td><td colspan='2'><input type='button' id='calcb' class='calcb' value='Calcular' onClick="+'"'+"calcular("+"'"+kind+"'"+","+"'"+counter+"'"+")"+'"'+"></td></tr><tr><td id='alert' colspan='2'></td></tr></table>";
-	}else{
+	}else if (kind == "acumulado"){
 		display = "<table class='bigForm'>";
 		for(var i = 0; i< counter; i++){
 			display += "<tr><td>Cuatrimestre "+(i+1)+":</td><td><input type='number' id='cuatrimestre"+i+"' maxlength=\"4\" placeholder=\"0.00\" onKeyUp=\"verfyfild('cuatrimestre"+i+"','calcb')\"></td></tr>";
@@ -88,17 +143,21 @@ function calc(kind)
 		display += "<tr><td></td><td><input type='button' value='Calcular' class='calcb' id='calcb' onClick="+'"'+"calcular("+"'"+kind+"'"+","+"'"+counter+"'"+")"+'"'+"></td></tr><tr><td id=\"alert\" colspan=\"2\"></tr>";
 	}
 	document.getElementById('content').innerHTML=display;
+
 }
 function calcular(kind, conter)
 {
 	var cont = conter -1;
 	var display;
-	if (kind == "cuatrimestral"){
+	var getKind = kind;
+	var getConter = conter;
+	var bool = verify(getConter,getKind);
+	if (kind == "cuatrimestral" && bool){
 		var crdt, crdtTotal, cal, calTotal;
 		crdtTotal=0;
 		calTotal=0;
 		for(var i = 0; i <= cont; i++){
-			var genID= "subject"+i;
+			var genID= "subject"+i;//Generar ID 
 			cal = parseInt(document.getElementById(genID).value);
 			genID = "crdt"+i;
 			crdt = parseInt(document.getElementById(genID).value);
@@ -106,7 +165,8 @@ function calcular(kind, conter)
 			calTotal = calTotal + (convert(cal)*crdt);
 		}
 		display = "<p>Su indice academico es: "+((calTotal/crdtTotal).toFixed(2))+"</p>";
-	}else{
+		document.getElementById('content').innerHTML=display;
+	}else if (kind == "acumulado" && bool){
 		var indice= 0;
 		var sum=0;
 		for(var i = 0; i <=cont; i++){
@@ -115,8 +175,10 @@ function calcular(kind, conter)
 		}
 		indice = sum/(cont+1);
 		display = "<p>Su indice academico es: "+(indice).toFixed(2)+"</p>";
+		document.getElementById('content').innerHTML=display;
+	}else{
+		document.getElementById("alert").innerHTML="Debe completar todos los campos";
 	}
-	document.getElementById('content').innerHTML=display;
 }
 function convert(cal)
 {// convert the calification to value, from 0 to 4
@@ -132,7 +194,7 @@ function convert(cal)
 	}else if(calc >=0 && calc <60){
 		return 0;
 	}else{
-		alert('ERROR. La calificacion debe ser de 0 a 100.');
+		document.getElementById("alert").innerHTML='ERROR. La calificacion debe ser de 0 a 100.';
 	}
 }
 function showMenu()
@@ -145,5 +207,5 @@ function about()
 	document.getElementById('content').innerHTML=display;
 }
 /*
-	*Note: for print a float is: toFix(2);
+	*Note: for print a float is: toFixed(2);
 */
