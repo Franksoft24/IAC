@@ -19,7 +19,7 @@ body
 p
 {
 	color: #7f8c8d;
-	font-size: 25px;
+	font-size: large;
 	font-family: 'PT Sans', sans-serif;
 }
 /*header style here*/
@@ -31,7 +31,7 @@ header
 	padding: 5%;
 	text-align: center;
 	font-family: 'Oswald', sans-serif;
-	font-size: 45px;
+	font-size: large;
 	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.35);
 }
 header a
@@ -59,13 +59,15 @@ nav
 	top: -100%;
 	height: 100%;
 	background-color: #22A7F0;
-	transition: 0.8s;
+	-webkit-transition: 0.8s;
+	-o-transition:0.8s;
+	transition:0.8s;
 }
 nav ul a
 {
 	text-decoration: none;
 	color: #C5EFF7;
-	font-size: 40px;
+	font-size: x-large;
 }
 nav ul a li
 {
@@ -121,7 +123,7 @@ nav ul a:hover li
 {
 	text-decoration: none;
 	text-align: center;
-	font-size: 35px;
+	font-size: medium;
 	padding: 2%;
 	color: #3498db;
 	text-transform: uppercase;
@@ -154,6 +156,7 @@ nav ul a:hover li
 	padding-top:3%;
 	padding-bottom:2%;
 	color: #2c3e50;
+	font-size: medium;
 }
 .ok, .calcb
 {
@@ -164,7 +167,7 @@ nav ul a:hover li
 	padding:5%;
 	text-align: center;;
 	text-transform: uppercase;
-	font-size:150%;
+	font-size:medium;
 	color: #ECECEC;
 	transition: 0.8s;
 }
@@ -175,15 +178,18 @@ nav ul a:hover li
 	padding: 3%;
 	text-align: center;
 	color: #2c3e50;
-	font-size: 30px;
+	font-size: x-small;
 }
 .bigForm input
 {
 	margin:0px;
 	border:0px;
-	padding:5%;
+	-webkit-padding:2%;
+	padding: 2%;
 	text-align:left;
-	width: 90%;
+	width: 98%;
+	-webkit-box-shadow: 0.5px 2px 1px 0px rgba(0, 0, 0, 0.25);
+	-o-box-shadow: 0.5px 2px 1px 0px rgba(0, 0, 0, 0.25);
 	box-shadow: 0.5px 2px 1px 0px rgba(0, 0, 0, 0.25);
 }
 .bigForm input:hover{}
@@ -191,6 +197,8 @@ nav ul a:hover li
 .bigForm input:focus{}
 .bigForm tr td
 {
+	-webkit-border: solid;
+	-webkit-border-color: #ECF0F1;
 	border: solid;
 	border-color: #ECF0F1;
 }
@@ -206,8 +214,9 @@ nav ul a:hover li
 	position: fixed;
 	top: 2%;
 	left: 2%;
-	width: 5%;
+	width: 10%;
 }
+/*Style for alert of system*/
 #alert
 {
 	color: #ff0000;

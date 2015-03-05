@@ -60,14 +60,14 @@ function cuatrimestral()
 {// this is the function for calc "indice cuatrimestral" 
 	var display="";
 	var kind = "cuatrimestral";
-	var display = "<table class='count'><tr><th>Cantidad de materias:</th></tr><tr><td><input type='text' maxlength=\"1\" onKeyUp="+'"'+"verfyfild('num','ok')"+'"'+" id='num'></td></tr><tr><td><input type='button' value='ok' class='ok' id='ok' onclick="+'"'+"calc('"+kind+"')"+'"'+"></td></tr><tr><td id='alert'></td></tr></table>";
+	var display = "<table class='count'><tr><th>Cantidad de materias:</th></tr><tr><td><input type='number' maxlength=\"1\" onKeyUp="+'"'+"verfyfild('num','ok')"+'"'+" id='num'></td></tr><tr><td><input type='button' value='ok' class='ok' id='ok' onclick="+'"'+"calc('"+kind+"')"+'"'+"></td></tr><tr><td id='alert'></td></tr></table>";
 	document.getElementById('content').innerHTML=display;
 }
 function acumulado()
 {// this is the function for calc "indice acumulado"
 	var display="";
 	var kind = "acumulado";
-	var display = "<table class='count'><tr><th>Cantidad de cuatrimestres:</th></tr><tr><td><input type='text' maxlength=\"2\" onKeyUp="+'"'+"verfyfild('num','ok')"+'"'+" id='num'></td></tr><tr><td><input type='button' value='ok' class='ok' id='ok' onclick="+'"'+"calc('"+kind+"')"+'"'+"></td></tr><tr><td id='alert'></td></tr></table>";
+	var display = "<table class='count'><tr><th>Cantidad de cuatrimestres:</th></tr><tr><td><input type='number' maxlength=\"2\" onKeyUp="+'"'+"verfyfild('num','ok')"+'"'+" id='num'></td></tr><tr><td><input type='button' value='ok' class='ok' id='ok' onclick="+'"'+"calc('"+kind+"')"+'"'+"></td></tr><tr><td id='alert'></td></tr></table>";
 	document.getElementById('content').innerHTML=display;
 }
 function calc(kind)
@@ -77,13 +77,13 @@ function calc(kind)
 	if(kind =="cuatrimestral"){
 		display = "<table class='bigForm'><tr><th></th><th>Calificación</th><th>Creditos</th></tr>";
 		for (var i = 0; i < counter; i++){
-			display+="<tr><td>Materia "+(i+1)+":</td><td><input type='text' maxlength=\"3\" onKeyUp=\"verfyfild('subject"+i+"','calcb')\" id='subject"+i+"'></td><td><input type='text' maxlength=\"1\" onKeyUp=\"verfyfild('crdt"+i+"','calcb')\" id='crdt"+i+"'></td></tr>";
+			display+="<tr><td>"+(i+1)+": </td><td><input type='number' maxlength=\"3\" onKeyUp=\"verfyfild('subject"+i+"','calcb')\" placeholder=\"00\" id='subject"+i+"'></td><td><input type='number' placeholder=\"0\" maxlength=\"1\" onKeyUp=\"verfyfild('crdt"+i+"','calcb')\" id='crdt"+i+"'></td></tr>";
 		}
 		display +="<tr><td></td><td colspan='2'><input type='button' id='calcb' class='calcb' value='Calcular' onClick="+'"'+"calcular("+"'"+kind+"'"+","+"'"+counter+"'"+")"+'"'+"></td></tr><tr><td id='alert' colspan='2'></td></tr></table>";
 	}else{
 		display = "<table class='bigForm'>";
 		for(var i = 0; i< counter; i++){
-			display += "<tr><td>Cuatrimestre "+(i+1)+":</td><td><input type='text' id='cuatrimestre"+i+"' maxlength=\"4\" onKeyUp=\"verfyfild('cuatrimestre"+i+"','calcb')\"></td></tr>";
+			display += "<tr><td>Cuatrimestre "+(i+1)+":</td><td><input type='number' id='cuatrimestre"+i+"' maxlength=\"4\" placeholder=\"0.00\" onKeyUp=\"verfyfild('cuatrimestre"+i+"','calcb')\"></td></tr>";
 		}
 		display += "<tr><td></td><td><input type='button' value='Calcular' class='calcb' id='calcb' onClick="+'"'+"calcular("+"'"+kind+"'"+","+"'"+counter+"'"+")"+'"'+"></td></tr><tr><td id=\"alert\" colspan=\"2\"></tr>";
 	}
